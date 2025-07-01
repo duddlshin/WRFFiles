@@ -1,0 +1,169 @@
+ &time_control
+ run_days                            = 00,
+ run_hours                           = 20,
+ run_minutes                         = 00,
+ run_seconds                         = 00,
+ start_year                          = 0001, 0001, 0001,
+ start_month                         = 01,   01,   01,
+ start_day                           = 01,   01,   01,
+ start_hour                          = 00,   01,   00,
+ start_minute                        = 00,   00,   00,
+ start_second                        = 00,   00,   00,
+ end_year                            = 0001, 0001, 0001,
+ end_month                           = 01,   01,   01,
+ end_day                             = 01,   01,   01,
+ end_hour                            = 00,   00,   00,
+ end_minute                          = 00,   00,   00,
+ end_second                          = 00,   00,   00,
+ history_interval_m                  = 00,   00,   00, ! run but do not save data
+ history_interval_s                  = 00,   00,   00,
+ frames_per_outfile                  = 100000, 100000, 100000,
+ restart                             = .false., ! this is a spin-up run
+ restart_interval_m                  = 1200,
+ io_form_history                     = 11,
+ io_form_restart                     = 11,
+ io_form_input                       = 2,
+ io_form_boundary                    = 2,
+ nocolons                            = .true.,
+ iofields_filename                   = "my_iofields",
+ /
+
+ &domains
+ time_step                           = 5,
+! time_step_fract_num                 = 0,
+! time_step_fract_den                 = 1,
+ max_dom                             = 1,
+ s_we                                = 1,     1,     1,
+ e_we                                = 101,   100,    151,
+ s_sn                                = 1,     1,     1,
+ e_sn                                = 101,   100,    151,
+ s_vert                              = 1,     1,     1,
+ e_vert                              = 151,   151,   151,
+ eta_levels                          = 1.00000, 0.99662, 0.99324, 0.98986, 0.98649,
+                                       0.98311, 0.97974, 0.97637, 0.97300, 0.96964,
+                                       0.96627, 0.96291, 0.95955, 0.95620, 0.95284,
+                                       0.94949, 0.94614, 0.94279, 0.93944, 0.93609,
+                                       0.93275, 0.92941, 0.92607, 0.92273, 0.91940,
+                                       0.91607, 0.91273, 0.90941, 0.90608, 0.90275,
+                                       0.89943, 0.89611, 0.89279, 0.88947, 0.88616,
+                                       0.88284, 0.87953, 0.87622, 0.87292, 0.86961,
+                                       0.86631, 0.86301, 0.85970, 0.85639, 0.85307,
+                                       0.84975, 0.84641, 0.84307, 0.83972, 0.83636,
+                                       0.83299, 0.82960, 0.82620, 0.82278, 0.81935,
+                                       0.81589, 0.81241, 0.80891, 0.80539, 0.80183,
+                                       0.79824, 0.79462, 0.79096, 0.78726, 0.78352,
+                                       0.77973, 0.77588, 0.77198, 0.76801, 0.76398,
+                                       0.75988, 0.75569, 0.75142, 0.74706, 0.74261,
+                                       0.73804, 0.73337, 0.72857, 0.72365, 0.71859,
+                                       0.71339, 0.70803, 0.70252, 0.69684, 0.69098,
+                                       0.68495, 0.67872, 0.67229, 0.66567, 0.65883,
+                                       0.65178, 0.64452, 0.63704, 0.62934, 0.62141,
+                                       0.61326, 0.60489, 0.59631, 0.58751, 0.57849,
+                                       0.56927, 0.55985, 0.55023, 0.54043, 0.53045,
+                                       0.52030, 0.50998, 0.49951, 0.48890, 0.47815,
+                                       0.46728, 0.45628, 0.44518, 0.43398, 0.42269,
+                                       0.41132, 0.39987, 0.38835, 0.37677, 0.36513,
+                                       0.35345, 0.34173, 0.32997, 0.31818, 0.30637,
+                                       0.29453, 0.28268, 0.27081, 0.25894, 0.24705,
+                                       0.23517, 0.22328, 0.21140, 0.19953, 0.18766,
+                                       0.17580, 0.16395, 0.15211, 0.14029, 0.12849,
+                                       0.11670, 0.10493, 0.09318, 0.08146, 0.06975,
+                                       0.05806, 0.04640, 0.03476, 0.02315, 0.01156,
+                                       0.00000,
+ dx                                  = 1000,
+ dy                                  = 1000,
+ ztop                                = 2000,  2000,  2000,
+ grid_id                             = 1,     2,     3,
+ parent_id                           = 0,     1,     2,
+ i_parent_start                      = 0,     10,    15,
+ j_parent_start                      = 0,     10,    15,
+ parent_grid_ratio                   = 1,     3,     3,
+ parent_time_step_ratio              = 1,     3,     3,
+ feedback                            = 0,
+ smooth_option                       = 0
+ /
+
+ &physics
+ mp_physics                          = 0,     0,     0,
+ ra_lw_physics                       = 0,     0,     0,
+ ra_sw_physics                       = 0,     0,     0,
+ radt                                = 0,     0,     0,
+ sf_sfclay_physics                   = 1,     1,     1,
+ sf_surface_physics                  = 0,     0,     0,
+ bl_pbl_physics                      = 1,     0,     0,
+ bldt                                = 0,     0,     0,
+ cu_physics                          = 0,     0,     0,
+ cudt                                = 0,     0,     0,
+ isfflx                              = 1, ! isfflx=1 to activate surface cooling/heating for idealized cases.
+ icloud                              = 0,
+ ifsnow                              = 0,
+ topo_wind                           = 0,     0,     0,
+ ysu_topdown_pblmix                  = 0,
+ /
+
+ &fdda
+ /
+
+ &dynamics
+ hybrid_opt                          = 0,
+ rk_ord                              = 3,
+ diff_opt                            = 1,      2,      2,
+ km_opt                              = 4,      2,      2,
+ m_opt                               = 1,
+ w_damping                           = 1,
+ damp_opt                            = 2,
+ zdamp                               = 1000.,  5000.,  5000.,
+ dampcoef                            = 0.003,    0.2,    0.2
+ khdif                               = 0.0,      1.,    .05,
+ kvdif                               = 0.0,      1.,    .05,
+ mix_isotropic                       = 0
+ smdiv                               = 0.1,    0.1,    0.1,
+ emdiv                               = 0.01,   0.01,   0.01,
+ epssm                               = 0.1,    0.1,    0.1
+ tke_heat_flux                       = 0.0,   0.24,   0.24,
+ time_step_sound                     = 6,      6,      6,
+ h_mom_adv_order                     = 5,      5,      5,
+ v_mom_adv_order                     = 3,      3,      3,
+ h_sca_adv_order                     = 5,      5,      5,
+ v_sca_adv_order                     = 3,      3,      3,
+ scalar_adv_opt                      = 1,      1,      1,
+ tke_adv_opt                         = 1,      1,      1,
+ mix_full_fields                     = .false., .true., .true.,
+ non_hydrostatic                     = .true., .true., .true.,
+ pert_coriolis                       = .true., .true., .true.,
+ base_temp                           = 301.0,
+ use_baseparam_fr_nml                = .true.,
+ use_theta_m                         = 0,
+ spec_ideal                          = 1,
+ spec_hfx                            = 58.158,
+ spec_z0                             = 0.02,
+ spec_sf_heatrate                    = 0.0,
+ spec_lat                            = 36.0,
+! spec_init_perts                     = .false.,
+! spec_pblh                           = 700.0,
+ /
+
+ &bdy_control
+ periodic_x                          = .true.,
+ symmetric_xs                        = .false.,
+ symmetric_xe                        = .false.,
+ open_xs                             = .false.,
+ open_xe                             = .false.,
+ periodic_y                          = .true.,
+ symmetric_ys                        = .false.,
+ symmetric_ye                        = .false.,
+ open_ys                             = .false.,
+ open_ye                             = .false.,
+ /
+
+ &grib2
+ /
+
+ &namelist_quilt
+ nio_tasks_per_group = 0,
+ nio_groups = 1,
+ /
+
+ &ideal
+ ideal_case = 9
+ /
