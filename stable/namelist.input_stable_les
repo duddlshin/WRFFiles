@@ -1,26 +1,25 @@
  &time_control
  run_days                            = 00,
- run_hours                           = 01,
+ run_hours                           = 09,
  run_minutes                         = 00,
  run_seconds                         = 00,
  start_year                          = 0001, 0001, 0001,
  start_month                         = 01,   01,   01,
  start_day                           = 01,   01,   01,
- start_hour                          = 08,   01,   00,
+ start_hour                          = 00,   01,   00,
  start_minute                        = 00,   00,   00,
  start_second                        = 00,   00,   00,
  end_year                            = 0001, 0001, 0001,
  end_month                           = 01,   01,   01,
  end_day                             = 01,   01,   01,
- end_hour                            = 09,   00,   00,
+ end_hour                            = 00,   01,   01,
  end_minute                          = 00,   00,   00,
  end_second                          = 00,   00,   00,
- history_interval_m                  = 05,   00,   00, ! run for 1 hour and save 5-min data to calculate turbulence statistics
+ history_interval_m                  = 10,   00,   00,
  history_interval_s                  = 00,   00,   00,
  frames_per_outfile                  = 100000, 100000, 100000,
- restart                             = .true., ! flag whether it is a restart run
+ restart                             = .false.,
  restart_interval_m                  = 0,
- override_restart_timers             = .true., ! whether to change the alarms from what is previously set
  io_form_history                     = 11,
  io_form_restart                     = 11,
  io_form_input                       = 2,
@@ -33,16 +32,16 @@
  /
 
  &domains
- time_step                           = 5,
-! time_step_fract_num                 = 0,
-! time_step_fract_den                 = 1,
+ time_step                           = 0,
+ time_step_fract_num                 = 1,
+ time_step_fract_den                 = 15,
  max_dom                             = 1,
  s_we                                = 1,     1,     1,
- e_we                                = 101,   100,    151,
+ e_we                                = 64,   100,    151,
  s_sn                                = 1,     1,     1,
- e_sn                                = 101,   100,    151,
+ e_sn                                = 64,   100,    151,
  s_vert                              = 1,     1,     1,
- e_vert                              = 64,   121,   121,
+ e_vert                              = 64,    64,    64,
  eta_levels                          = 1.00000, 0.98383, 0.96767, 0.95152, 0.93537,
                                        0.91924, 0.90312, 0.88701, 0.87090, 0.85481,
                                        0.83873, 0.82265, 0.80659, 0.79053, 0.77449,
@@ -56,8 +55,8 @@
                                        0.20325, 0.18756, 0.17187, 0.15620, 0.14054,
                                        0.12489, 0.10924, 0.09361, 0.07798, 0.06237,
                                        0.04676, 0.03116, 0.01558, 0.00000,
- dx                                  = 1000,
- dy                                  = 1000,
+ dx                                  = 6.25,
+ dy                                  = 6.25,
  ztop                                = 400,  2000,  2000,
  grid_id                             = 1,     2,     3,
  parent_id                           = 0,     1,     2,
@@ -76,33 +75,36 @@
  radt                                = 0,     0,     0,
  sf_sfclay_physics                   = 1,     1,     1,
  sf_surface_physics                  = 0,     0,     0,
- bl_pbl_physics                      = 1,     0,     0,
+ bl_pbl_physics                      = 0,     0,     0,
  bldt                                = 0,     0,     0,
  cu_physics                          = 0,     0,     0,
  cudt                                = 0,     0,     0,
- isfflx                              = 1, ! isfflx=1 to activate surface cooling/heating for idealized cases.
- icloud                              = 0,
- ifsnow                              = 0,
- topo_wind                           = 2,     0,     0,
- ysu_topdown_pblmix                  = 1,
+ isfflx                              = 1,
  /
 
  &fdda
  /
 
  &dynamics
- hybrid_opt                          = 0,
+ hybrid_opt                          = 0, 
  rk_ord                              = 3,
- diff_opt                            = 1,      2,      2,
- km_opt                              = 4,      2,      2,
+ diff_opt                            = 2,      2,      2,
+ km_opt                              = 3,      3,      3, ! using km_opt=2 does not generate turbulence for some reason. Take a look at dyn_em/module_diffusion_em.F later.
  m_opt                               = 1,
- w_damping                           = 1,
+! sfs_opt                             = 1,
+! zadvect_implicit                    = 1,
+! w_crit_cfl                          = 2.0
+! diff_6th_opt                        = 2,      0,      0,
+! diff_6th_factor                     = 0.12,   0.12,   0.12, 
+ w_damping                           = 0,
  damp_opt                            = 2,
  zdamp                               = 100.,  5000.,  5000.,
  dampcoef                            = 0.003,    0.2,    0.2
- khdif                               = 0.0,      1.,    .05,
- kvdif                               = 0.0,      1.,    .05,
- mix_isotropic                       = 0
+ khdif                               = 1.,      1.,    .05,
+ kvdif                               = 1.,      1.,    .05,
+ c_s                                 = 0.15
+ c_k                                 = 0.10
+ mix_isotropic                       = 1
  smdiv                               = 0.1,    0.1,    0.1,
  emdiv                               = 0.01,   0.01,   0.01,
  epssm                               = 0.1,    0.1,    0.1
@@ -112,33 +114,34 @@
  v_mom_adv_order                     = 3,      3,      3,
  h_sca_adv_order                     = 5,      5,      5,
  v_sca_adv_order                     = 3,      3,      3,
+ moist_adv_opt                       = 1,      1,      1,
  scalar_adv_opt                      = 1,      1,      1,
  tke_adv_opt                         = 1,      1,      1,
- mix_full_fields                     = .false., .true., .true.,
+! momentum_adv_opt                    = 1,      1,      1,
+ mix_full_fields                     = .true., .true., .true.,
  non_hydrostatic                     = .true., .true., .true.,
  pert_coriolis                       = .true., .true., .true.,
- base_temp                           = 265.0,
- use_baseparam_fr_nml                = .true.,
+! base_temp                           = 263.5,
+! use_baseparam_fr_nml                = .true.,
  use_theta_m                         = 0,
  spec_ideal                          = 1,
  spec_hfx                            = 0.0,
  spec_z0                             = 0.1,
- spec_sf_heatrate                    = -0.125,
+ spec_sf_heatrate                    = -0.25, !cooling rate for sbl. To activate it, set isfflx=1
  spec_lat                            = 73.0,
  column_out_opt                      = 1,
- column_out_i                        = 50,
- column_out_j                        = 50,
-! spec_init_perts                     = .false.,
-! spec_pblh                           = 700.0,
+ column_out_ij                       = 1
+ column_out_i                        = 32,
+ column_out_j                        = 32,
  /
 
  &bdy_control
- periodic_x                          = .true.,
+ periodic_x                          = .true., 
  symmetric_xs                        = .false.,
  symmetric_xe                        = .false.,
  open_xs                             = .false.,
  open_xe                             = .false.,
- periodic_y                          = .true.,
+ periodic_y                          = .true., 
  symmetric_ys                        = .false.,
  symmetric_ye                        = .false.,
  open_ys                             = .false.,

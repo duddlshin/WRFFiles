@@ -79,8 +79,8 @@
  isfflx                              = 1, ! isfflx=1 to activate surface cooling/heating for idealized cases.
  icloud                              = 0,
  ifsnow                              = 0,
- topo_wind                           = 0,     0,     0,
- ysu_topdown_pblmix                  = 0,
+ topo_wind                           = 2,     0,     0,
+ ysu_topdown_pblmix                  = 1,
  /
 
  &fdda

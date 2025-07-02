@@ -15,7 +15,7 @@
  end_hour                            = 09,   00,   00,
  end_minute                          = 00,   00,   00,
  end_second                          = 00,   00,   00,
- history_interval_m                  = 00,   00,   00, ! run for 1 hour and save 5-min data to calculate turbulence statistics
+ history_interval_m                  = 05,   00,   00, ! run for 1 hour and save 5-min data to calculate turbulence statistics
  history_interval_s                  = 00,   00,   00,
  frames_per_outfile                  = 100000, 100000, 100000,
  restart                             = .true., ! flag whether it is a restart run
