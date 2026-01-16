@@ -15,7 +15,7 @@
  end_hour                            = 09,   00,   00,
  end_minute                          = 00,   00,   00,
  end_second                          = 00,   00,   00,
- history_interval_m                  = 05,   00,   00, ! run for 1 hour and save 5-min data to calculate turbulence statistics
+ history_interval_m                  = 00,   00,   00, ! run for 1 hour and save 5-min data to calculate turbulence statistics
  history_interval_s                  = 00,   00,   00,
  frames_per_outfile                  = 100000, 100000, 100000,
  restart                             = .true., ! flag whether it is a restart run
@@ -85,6 +85,9 @@
  ifsnow                              = 0,
  topo_wind                           = 2,     0,     0,
  ysu_topdown_pblmix                  = 1,
+ shinhong_tke_diag                   = 1,
+ bl_mynn_closure                     = 2.5,
+ bl_mynn_mixlength                   = 2,
  /
 
  &fdda
@@ -123,7 +126,7 @@
  spec_ideal                          = 1,
  spec_hfx                            = 0.0,
  spec_z0                             = 0.1,
- spec_sf_heatrate                    = -0.25,
+ spec_sf_heatrate                    = -1.0,
  spec_lat                            = 73.0,
  column_out_opt                      = 1,
  column_out_ij                       = 1, 

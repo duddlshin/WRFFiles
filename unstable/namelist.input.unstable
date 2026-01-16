@@ -1,25 +1,25 @@
  &time_control
  run_days                            = 00,
- run_hours                           = 01,
+ run_hours                           = 04,
  run_minutes                         = 00,
  run_seconds                         = 00,
  start_year                          = 0001, 0001, 0001,
  start_month                         = 01,   01,   01,
  start_day                           = 01,   01,   01,
- start_hour                          = 02,   01,   00,
+ start_hour                          = 00,   01,   00,
  start_minute                        = 00,   00,   00,
  start_second                        = 00,   00,   00,
  end_year                            = 0001, 0001, 0001,
  end_month                           = 01,   01,   01,
  end_day                             = 01,   01,   01,
- end_hour                            = 03,   00,   00,
+ end_hour                            = 04,   00,   00,
  end_minute                          = 00,   00,   00,
  end_second                          = 00,   00,   00,
- history_interval_m                  = 10,   00,   00, ! run for 8 hours and do not save data
+ history_interval_m                  = 00,   00,   00, ! run for 8 hours and do not save data
+ history_interval_s                  = 00,   00,   00,
  frames_per_outfile                  = 100000, 100000, 100000,
  restart                             = .false., ! this is a spin-up run
  restart_interval_m                  = 0,
- override_restart_timers             = .true., ! whether to change the alarms from what is previously set
  io_form_history                     = 11,
  io_form_restart                     = 11,
  io_form_input                       = 2,
@@ -33,8 +33,8 @@
 
  &domains
  time_step                           = 5,
-! time_step_fract_num                 = 0,
-! time_step_fract_den                 = 1,
+! time_step_fract_num                 = 1,
+! time_step_fract_den                 = 15,
  max_dom                             = 1,
  s_we                                = 1,     1,     1,
  e_we                                = 101,   100,    151,
@@ -95,6 +95,9 @@
  ifsnow                              = 0,
  topo_wind                           = 2,     0,     0,
  ysu_topdown_pblmix                  = 1,
+ shinhong_tke_diag                   = 0,
+ bl_mynn_closure                     = 2.5,
+ bl_mynn_mixlength                   = 2,
  /
 
  &fdda
@@ -104,7 +107,7 @@
  hybrid_opt                          = 0,
  rk_ord                              = 3,
  diff_opt                            = 1,      2,      2,
- km_opt                              = 4,      2,      2,
+ km_opt                              = 4,      3,      3, ! using km_opt=2 does not generate turbulence for some reason. Take a look at dyn_em/module_diffusion_em.F later.
  m_opt                               = 1,
  w_damping                           = 1,
  damp_opt                            = 2,
@@ -127,21 +130,19 @@
  mix_full_fields                     = .false., .true., .true.,
  non_hydrostatic                     = .true., .true., .true.,
  pert_coriolis                       = .true., .true., .true.,
- base_temp                           = 300.0,
- use_baseparam_fr_nml                = .true.,
+! base_temp                           = 300.0,
+! use_baseparam_fr_nml                = .true.,
  use_theta_m                         = 0,
  spec_ideal                          = 1,
- spec_hfx                            = 232.4,
+ spec_hfx                            = 58.1   ! 232.4,
  spec_z0                             = 0.1,
  spec_sf_heatrate                    = 0.0,
  spec_lat                            = 43.3,
  column_out_opt                      = 1,
- column_out_ij                       = 1,
- column_out_i                        = 50,
- column_out_j                        = 50,
-! spec_init_perts                     = .false.,
-! spec_pblh                           = 700.0,
- /
+ column_out_ij                       = 1
+ column_out_i                        = 32,
+ column_out_j                        = 32,
+/
 
  &bdy_control
  periodic_x                          = .true.,
