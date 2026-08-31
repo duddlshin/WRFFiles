@@ -1,25 +1,25 @@
  &time_control
  run_days                            = 00,
- run_hours                           = 01,
- run_minutes                         = 30,
+ run_hours                           = 04,
+ run_minutes                         = 00,
  run_seconds                         = 00,
  start_year                          = 0001, 0001, 0001,
  start_month                         = 01,   01,   01,
  start_day                           = 01,   01,   01,
- start_hour                          = 03,   01,   00,
+ start_hour                          = 00,   01,   00,
  start_minute                        = 00,   00,   00,
  start_second                        = 00,   00,   00,
  end_year                            = 0001, 0001, 0001,
  end_month                           = 01,   01,   01,
  end_day                             = 01,   01,   01,
  end_hour                            = 04,   00,   00,
- end_minute                          = 30,   00,   00,
+ end_minute                          = 00,   00,   00,
  end_second                          = 00,   00,   00,
- history_interval_m                  = 10,   00,   00, ! run for 8 hours and do not save data
+ history_interval_m                  = 00,   00,   00, ! run for 8 hours and do not save data
+ history_interval_s                  = 00,   00,   00,
  frames_per_outfile                  = 100000, 100000, 100000,
- restart                             = .true., ! flag whether it is a restart run
+ restart                             = .false., ! this is a spin-up run
  restart_interval_m                  = 0,
- override_restart_timers             = .true., ! whether to change the alarms from what is previously set
  io_form_history                     = 11,
  io_form_restart                     = 11,
  io_form_input                       = 2,
@@ -100,7 +100,7 @@
  hybrid_opt                          = 0,
  rk_ord                              = 3,
  diff_opt                            = 2,      2,      2,
- km_opt                              = 3,      3,      3, ! using km_opt=2 does not generate turbulence for some reason. Take a look at dyn_em/module_diffusion_em.F later.
+ km_opt                              = 2,      3,      3, ! using km_opt=2 does not generate turbulence for some reason. Take a look at dyn_em/module_diffusion_em.F later.
  m_opt                               = 1,
 ! sfs_opt                             = 1,
 ! zadvect_implicit                    = 1,
@@ -119,7 +119,7 @@
  smdiv                               = 0.1,    0.1,    0.1,
  emdiv                               = 0.01,   0.01,   0.01,
  epssm                               = 0.1,    0.1,    0.1
- tke_heat_flux                       = 0.05,   0.24,   0.24,
+ tke_heat_flux                       = 0.20,   0.24,   0.24,
  time_step_sound                     = 6,      6,      6,
  h_mom_adv_order                     = 5,      5,      5,
  v_mom_adv_order                     = 3,      3,      3,
@@ -138,7 +138,7 @@
  spec_ideal                          = 3,
  spec_hfx                            = 0.0,
  spec_z0                             = 0.1,
- spec_sf_heatrate                    = -0.25,
+ spec_sf_heatrate                    = 0.0,
  spec_lat                            = 43.3,
  column_out_opt                      = 1,
  column_out_ij                       = 1
